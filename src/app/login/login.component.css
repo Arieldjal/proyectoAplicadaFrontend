@@ -1,0 +1,34 @@
+mat-card {
+    width: 500px;
+    text-align: center;
+    height: 280px;
+  }
+
+  mat-card-header {
+    justify-content: center;
+  }
+
+  .full-width {
+    width: 80%;
+  }
+  
+  .button-row {
+    padding-top: 5px;
+  }
+  
+  .button-row a {
+    margin-right: 8px;
+    text-align: center;
+  }
+  
+  .emailField {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .passwordField {
+    padding-top: 5px;
+    padding-bottom: 15px;
+  }
+  
+  

@@ -1,0 +1,40 @@
+<div class="main-div">
+    <mat-card>
+        <mat-card-content>
+            <mat-card-header>
+                <mat-card-title>Ingreso al sistema</mat-card-title>
+            </mat-card-header>
+
+            <form (ngSubmit)="login()" [formGroup]="loginForm" name="loginForm">
+                <div class="emailField">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Correo Electrónico</mat-label>
+                        <input formControlName="loginName" matInput placeholder="Ingrese su correo electrónico" required
+                            autocomplete="off" />
+                        <mat-error *ngIf="!loginForm.controls['loginName'].valid">
+                            Correo electrónico requerido
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="passwordField">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Contraseña</mat-label>
+                        <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required
+                            autocomplete="off" />
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                            [attr.aria-label]="'Ocultar'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="!loginForm.controls['password'].valid">
+                            Contraseña requerida
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <button class="full-width" type="submit" mat-flat-button color="primary">Ingresar</button>
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+</div>

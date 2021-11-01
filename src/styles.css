@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.background-image {
+    background: url("./assets/images/aqua.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.custom-snackbar .mat-simple-snackbar {
+    color: white;
+    justify-content: center;
+}
+
+.toolbar-custom {
+    position: fixed !important;
+    width: 100%;
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 10; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.main-div {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
