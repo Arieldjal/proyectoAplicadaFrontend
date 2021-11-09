@@ -1,0 +1,92 @@
+<mat-grid-list cols="2" rowHeight="80px" [gutterSize]="'10px'">
+    <mat-grid-tile [colspan]="2">
+        <h2 mat-dialog-title>Agregar solicitud</h2>
+    </mat-grid-tile>
+    <form [formGroup]="solicitudForm" (ngSubmit)="addSolicitud()" #formDir="ngForm">
+
+        <mat-dialog-content>
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Id</mat-label>
+                    <input matInput type="number" formControlName="idSolicitud" placeholder="Ingrese un id" required
+                        autocomplete="off">
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1"></mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha de inicio</mat-label>
+                    <input matInput [matDatepicker]="fechaInicioPicker" [min]="this.currentDate" formControlName="fechaInicio"
+                        placeholder="Ingrese una fecha de inicio" required autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="fechaInicioPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaInicioPicker></mat-datepicker>
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha de finalización</mat-label>
+                    <input matInput [matDatepicker]="fechaFinPicker" [min]="this.solicitudForm.controls['fechaInicio'].value" formControlName="fechaFin"
+                        placeholder="Ingrese una fecha de finalización" required autocomplete="off">
+                    <mat-datepicker-toggle matSuffix [for]="fechaFinPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fechaFinPicker></mat-datepicker>
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Usuario Aplicativo</mat-label>
+                    <mat-select formControlName="idUsuarioAplicativo" required>
+                        <mat-option *ngFor="let item of funcionarioCompleteList" [value]="item.IdFuncionario">
+                            [{{item.IdFuncionario}}]: {{item.NombreCompleto}}</mat-option>
+                    </mat-select>
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Responsable TI</mat-label>
+                    <mat-select formControlName="idResponsableTI" required>
+                        <mat-option *ngFor="let item of responsableTIList" [value]="item.IdFuncionario">
+                            [{{item.IdFuncionario}}]: {{item.NombreCompleto}}</mat-option>
+                    </mat-select>
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Responsable Usuario Final</mat-label>
+                    <mat-select formControlName="idResponsableUsuarioFinal" required>
+                        <mat-option *ngFor="let item of funcionarioCompleteList" [value]="item.IdFuncionario">
+                            [{{item.IdFuncionario}}]: {{item.NombreCompleto}}</mat-option>
+                    </mat-select>
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1"></mat-grid-tile>
+
+            <mat-grid-tile [colspan]="2">
+                <label>Archivos .pdf</label>
+                <input type="file" accept="application/pdf" (change)="onSelectNewFile($event?.target)" />
+            </mat-grid-tile>
+
+        </mat-dialog-content>
+
+        <mat-grid-tile [colspan]="2">
+            <mat-dialog-actions>
+                <button type="submit" mat-raised-button name="submitButton">Agregar</button>
+                <button mat-raised-button mat-dialog-close name="cancelButton">Cancelar</button>
+            </mat-dialog-actions>
+        </mat-grid-tile>
+
+    </form>
+
+</mat-grid-list>

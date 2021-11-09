@@ -13,9 +13,9 @@
         <button mat-menu-item [routerLink]="'/funcionario'">Funcionario</button>
         <button mat-menu-item [routerLink]="'/funcionario'">Transacción</button>
     </mat-menu>
-    <a mat-button class="toolbar-button">Solicitud</a>
+    <a mat-button class="toolbar-button" [routerLink]="'/solicitud'">Solicitud</a>
     <a mat-button class="toolbar-button">Cambios</a>
-    <a mat-button class="toolbar-button">Avances</a>
+    <a mat-button class="toolbar-button" [routerLink]="'/avance'">Avances</a>
     <a mat-button class="toolbar-button">Reportes</a>
     <a mat-button class="toolbar-button">Cubo</a>
     <a mat-raised-button color="accent" class="toolbar-button" (click)="logOut()">Cerrar sesión</a>

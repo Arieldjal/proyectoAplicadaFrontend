@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 
-const endpoint = 'http://localhost:3000/api/funcionario/';
+const endpoint = 'http://localhost:3000/api/solicitud/';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-type': 'application/json'
@@ -13,48 +13,43 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class FuncionarioService {
-
+export class SolicitudService {
 
   constructor(private http: HttpClient) { }
 
-  getFuncionarios(): Observable<any> {
+  getSolicitudes(): Observable<any> {
     return this.http.get(endpoint + 'consultar');
   }
 
-  addFuncionario(funcionario): Observable<any> {
-    return this.http.post(endpoint, JSON.stringify(funcionario), httpOptions).pipe(
+  addSolicitud(solicitud): Observable<any> {
+    return this.http.post(endpoint, JSON.stringify(solicitud), httpOptions).pipe(
       tap(res => {
         return res;
       }),
-      catchError(this.handleError<any>('agregar funcionario'))
+      catchError(this.handleError<any>('agregar solicitud'))
     );
   }
 
-  getFuncionarioById(idFuncionario) {
-    return this.http.get(endpoint + 'consultarId/' + idFuncionario);
+  getSolicitudById(idSolicitud) {
+    return this.http.get(endpoint + 'consultarId/' + idSolicitud);
   }
 
-  updateFuncionario(funcionario): Observable<any> {
-    return this.http.put(endpoint + 'editar', JSON.stringify(funcionario), httpOptions).pipe(
+  updateSolicitud(solicitud): Observable<any> {
+    return this.http.put(endpoint + 'editar', JSON.stringify(solicitud), httpOptions).pipe(
       tap(res => {
         return res;
       }),
-      catchError(this.handleError<any>('editar funcionario'))
+      catchError(this.handleError<any>('editar solicitud'))
     );
   }
 
-  deleteFuncionario(idFuncionario): Observable<any> {
-    return this.http.delete(endpoint + 'eliminar/' + idFuncionario).pipe(
+  deleteSolicitud(idSolicitud): Observable<any> {
+    return this.http.delete(endpoint + 'eliminar/' + idSolicitud).pipe(
       tap(res => {
         return res;
       }),
-      catchError(this.handleError<any>('eliminar funcionario'))
+      catchError(this.handleError<any>('eliminar solicitud'))
     );
-  }
-
-  getMainFuncionariosData(): Observable<any> {
-    return this.http.get(endpoint + 'consultaSimple');
   }
 
   private handleError<T>(operation = "operation", result?: T) {

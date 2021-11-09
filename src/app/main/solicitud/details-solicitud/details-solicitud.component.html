@@ -1,0 +1,63 @@
+<mat-grid-list cols="3" rowHeight="80px" [gutterSize]="'10px'">
+    <mat-grid-tile [colspan]="3">
+        <h2 mat-dialog-title>Detalles de la solicitud {{solicitud.IdSolicitud}}</h2>
+    </mat-grid-tile>
+
+    <mat-dialog-content>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Fecha Hora</mat-label>
+                <input matInput disabled>{{solicitud.FechaHora}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Fecha inicio</mat-label>
+                <input matInput disabled>{{solicitud.FechaInicio}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Fecha fin</mat-label>
+                <input matInput disabled>{{solicitud.FechaFin}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Usuario Aplicativo</mat-label>
+                <input matInput disabled>{{solicitud.UsuarioAplicativo}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Responsable TI</mat-label>
+                <input matInput disabled>{{solicitud.ResponsableTI}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Responsable Usuario Final</mat-label>
+                <input matInput disabled>{{solicitud.ResponsableUsuarioFinal}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="3">
+                <button class="no-background-button" type="button" (click)="downloadPdf()"><i class="material-icons">picture_as_pdf</i>Acta Constitutiva Solicitud {{this.solicitud.IdSolicitud}}
+                </button>
+        </mat-grid-tile>
+
+    </mat-dialog-content>
+
+    <mat-grid-tile [colspan]="3">
+        <mat-dialog-actions>
+            <button mat-raised-button mat-dialog-close name="cancelButton">Cancelar</button>
+        </mat-dialog-actions>
+    </mat-grid-tile>
+
+</mat-grid-list>

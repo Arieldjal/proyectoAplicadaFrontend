@@ -48,7 +48,7 @@ export class AddFuncionarioComponent implements OnInit {
 
     this.funcionarioService.addFuncionario(this.funcionarioForm.value).subscribe((result) => {
       if (result == true) {
-        this.snackbarService.openSnackBar('Funcionario ingresado con exito')
+        this.snackbarService.openSnackBar('Funcionario ingresado con éxito')
         this.dialogRef.close(true);
       } else {
         this.snackbarService.openSnackBar('Error al ingresar un nuevo funcionario')

@@ -46,9 +46,11 @@ export class FuncionarioComponent implements OnInit {
 
   getFuncionarios() {
     this.funcionarioService.getFuncionarios().subscribe((data: any[]) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+      if (data) {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
     });
   }
 

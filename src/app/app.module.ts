@@ -36,6 +36,11 @@ import { AddFuncionarioComponent } from './main/mantenimiento/funcionario/add-fu
 import { EditFuncionarioComponent } from './main/mantenimiento/funcionario/edit-funcionario/edit-funcionario.component';
 import { DetailsFuncionarioComponent } from './main/mantenimiento/funcionario/details-funcionario/details-funcionario.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { SolicitudComponent } from './main/solicitud/solicitud.component';
+import { AvanceComponent } from './main/avance/avance.component';
+import { AddSolicitudComponent } from './main/solicitud/add-solicitud/add-solicitud.component';
+import { EditSolicitudComponent } from './main/solicitud/edit-solicitud/edit-solicitud.component';
+import { DetailsSolicitudComponent } from './main/solicitud/details-solicitud/details-solicitud.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +55,12 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     AddFuncionarioComponent,
     EditFuncionarioComponent,
     DetailsFuncionarioComponent,
-    NavBarComponent
+    NavBarComponent,
+    SolicitudComponent,
+    AvanceComponent,
+    AddSolicitudComponent,
+    EditSolicitudComponent,
+    DetailsSolicitudComponent
   ],
   imports: [
     BrowserModule,

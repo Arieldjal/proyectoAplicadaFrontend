@@ -59,7 +59,7 @@ export class EditFuncionarioComponent implements OnInit {
 
     this.funcionarioService.updateFuncionario(this.updateForm.value).subscribe((result) => {
       if (result == true) {
-        this.snackbarService.openSnackBar('Funcionario ' + this.data.dataKey + ' actualizado con exito')
+        this.snackbarService.openSnackBar('Funcionario ' + this.data.dataKey + ' actualizado con éxito')
         this.dialogRef.close(true);
       } else {
         this.snackbarService.openSnackBar('Error al actualizar el funcionario ' + this.data.dataKey)

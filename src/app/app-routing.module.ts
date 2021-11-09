@@ -4,6 +4,8 @@ import { AuthGuard } from './guard/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { FuncionarioComponent } from './main/mantenimiento/funcionario/funcionario.component';
+import { SolicitudComponent } from './main/solicitud/solicitud.component';
+import { AvanceComponent } from './main/avance/avance.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: FuncionarioComponent,
     data: { title: 'Funcionario'}
+  },
+  {
+    path: 'solicitud',
+    canActivate: [AuthGuard],
+    component: SolicitudComponent,
+    data: { title: 'Solicitud'}
+  },
+  {
+    path: 'avance',
+    canActivate: [AuthGuard],
+    component: AvanceComponent,
+    data: { title: 'Avance'}
   },
   {
     path: '',
