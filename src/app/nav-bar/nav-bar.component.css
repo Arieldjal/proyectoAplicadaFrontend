@@ -1,0 +1,11 @@
+.toolbar-button {
+    overflow-x: hidden !important;
+}
+
+::ng-deep .customize {
+    background-color: #673ab7;
+}
+
+.mat-menu-item {
+    color: #ffffff;
+}

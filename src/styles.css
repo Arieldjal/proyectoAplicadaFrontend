@@ -33,3 +33,75 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     justify-content: center;
     align-items: center;
 }
+
+.child-div {
+    height: 100vh;
+}
+
+.content-div {
+    padding-top: 80px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+table.mat-table {
+    width: 100%;
+}
+
+.table-div {
+    padding-top: 5px;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.add-funcionario-dialog .mat-dialog-container {
+    background-color: #ffffff;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+  
+button[name="submitButton"]{
+    background-color:  #898989;
+    color: #ffffff;
+    margin-right: 5px;
+}
+  
+button[name="cancelButton"]{
+    background-color: #ef6161;
+    color: #ffffff;
+}
+  
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background: #ffffff;
+}
+
+/* filter controls */
+.search-div{
+    margin: 10px;
+      }
+      .search-form-field{
+          width: 60%;
+          margin-left: 10px;
+          padding: 5px 10px;
+          background-color: #ffffff;
+          border-radius: 5px;
+          }
+          .search-form-field div.mat-form-field-underline {
+              display: none;
+          }
+          .search-form-field div.mat-form-field-infix{
+              border-top: 0px;
+          }
+          .search-form-field div.mat-form-field-wrapper{
+            padding-bottom: 0px;
+        }
+        .search-form-field div.mat-form-field-suffix button{
+            height: 32px;
+            width: 32px;
+        }
