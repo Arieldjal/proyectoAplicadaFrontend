@@ -1,0 +1,49 @@
+<mat-grid-list cols="2" rowHeight="80px" [gutterSize]="'10px'">
+    <mat-grid-tile [colspan]="2">
+        <h2 mat-dialog-title>Detalles del avance {{avance.IdAvance}}</h2>
+    </mat-grid-tile>
+
+    <mat-dialog-content>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Id Solicitud</mat-label>
+                <input matInput disabled>{{avance.IdSolicitud}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Fecha Hora</mat-label>
+                <input matInput disabled>{{avance.FechaHora}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Trimestre</mat-label>
+                <input matInput disabled>{{avance.Descripcion}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Usuario Aplicativo</mat-label>
+                <input matInput disabled>{{avance.UsuarioAplicativo}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="2">
+                <button class="no-background-button" type="button" (click)="downloadPdf()"><i class="material-icons">picture_as_pdf</i>Documento Avance {{avance.IdAvance}}
+                </button>
+        </mat-grid-tile>
+
+    </mat-dialog-content>
+
+    <mat-grid-tile [colspan]="2">
+        <mat-dialog-actions>
+            <button mat-raised-button mat-dialog-close name="cancelButton">Cancelar</button>
+        </mat-dialog-actions>
+    </mat-grid-tile>
+
+</mat-grid-list>

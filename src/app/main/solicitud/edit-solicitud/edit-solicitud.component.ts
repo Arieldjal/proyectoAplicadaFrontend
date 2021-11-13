@@ -45,7 +45,12 @@ export class EditSolicitudComponent implements OnInit {
       this.fileUrl = this.solicitud.DocumentoActaConstitutiva;
       this.updateForm.controls['documentoActaConstitutiva'].setValue(this.solicitud.DocumentoActaConstitutiva);
       this.updateForm.controls['idSolicitud'].setValue(this.data.dataKey);
-      this.currentDocumentName = "Acta Constitutiva Solicitud " + this.data.dataKey;
+
+      if(this.solicitud.DocumentoActaConstitutiva==null || this.solicitud.DocumentoActaConstitutiva=="null"){
+        this.currentDocumentName = "No hay documento guardado";
+      } else {
+        this.currentDocumentName = "Acta Constitutiva Solicitud " + this.data.dataKey;
+      }
     });
   }
 
@@ -54,6 +59,8 @@ export class EditSolicitudComponent implements OnInit {
   }
 
   updateSolicitud() {
+    this.updateForm.controls['idUsuarioAplicativo'].setValue(JSON.parse(sessionStorage.getItem('currentUser')).IdFuncionario);
+
     if (!this.updateForm.valid) {
       return;
     }
@@ -73,10 +80,7 @@ export class EditSolicitudComponent implements OnInit {
   loadFuncionarioList() {
     this.funcionarioService.getMainFuncionariosData().subscribe((data: any[]) => {
       this.funcionarioCompleteList = data;
-      
       this.responsableTIList = this.filterFuncionarios("TI");
-      /**Que sucede con las otras lista de funcionarios? De que departamentos son? Puede un mismo funcionario estar en los 3? */
-
     });
   }
 

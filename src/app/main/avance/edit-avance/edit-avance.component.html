@@ -1,0 +1,24 @@
+<mat-grid-list cols="3" rowHeight="80px" [gutterSize]="'10px'">
+    <mat-grid-tile [colspan]="3">
+        <h2 mat-dialog-title>Editar avance {{avance.IdAvance}}</h2>
+    </mat-grid-tile>
+    <form [formGroup]="updateForm" (ngSubmit)="updateAvance()" #formDir="ngForm">
+
+        <mat-dialog-content>
+
+            <mat-grid-tile [colspan]="3">
+                    <button class="no-background-button" type="button"><i class="material-icons">picture_as_pdf</i>{{this.currentDocumentName}}</button>
+                    <input type="file" accept="application/pdf" (change)="onSelectNewFile($event?.target)"/>
+            </mat-grid-tile>
+
+        </mat-dialog-content>
+
+        <mat-grid-tile [colspan]="3">
+            <mat-dialog-actions>
+                <button type="submit" mat-raised-button name="submitButton">Actualizar</button>
+                <button mat-raised-button mat-dialog-close name="cancelButton">Cancelar</button>
+            </mat-dialog-actions>
+        </mat-grid-tile>
+
+    </form>
+</mat-grid-list>

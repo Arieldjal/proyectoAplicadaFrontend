@@ -41,6 +41,8 @@ export class AddSolicitudComponent implements OnInit {
   }
 
   addSolicitud(){
+    this.solicitudForm.controls['idUsuarioAplicativo'].setValue(JSON.parse(sessionStorage.getItem('currentUser')).IdFuncionario);
+
     if (!this.solicitudForm.valid) {
       return;
     }
@@ -62,10 +64,7 @@ export class AddSolicitudComponent implements OnInit {
     this.funcionarioService.getMainFuncionariosData().subscribe((data: any[]) => {
       console.log(data);
       this.funcionarioCompleteList = data;
-      
       this.responsableTIList = this.filterFuncionarios("TI");
-      /**Que sucede con las otras lista de funcionarios? De que departamentos son? Puede un mismo funcionario estar en los 3? */
-
     });
   }
 

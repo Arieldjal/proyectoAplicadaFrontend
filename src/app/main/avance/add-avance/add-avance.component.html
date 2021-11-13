@@ -1,0 +1,33 @@
+<mat-grid-list cols="2" rowHeight="80px" [gutterSize]="'10px'">
+    <mat-grid-tile [colspan]="2">
+        <h2 mat-dialog-title>Agregar avance a solicitud {{data.dataKey}}</h2>
+    </mat-grid-tile>
+    <form [formGroup]="avanceForm" (ngSubmit)="addAvance()" #formDir="ngForm">
+
+        <mat-dialog-content>
+            <mat-grid-tile [colspan]="2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Id</mat-label>
+                    <input matInput type="number" formControlName="idAvance" placeholder="Ingrese un id" required
+                        autocomplete="off">
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="2">
+                <label>Archivos .pdf</label>
+                <input type="file" accept="application/pdf" (change)="onSelectNewFile($event?.target)" />
+            </mat-grid-tile>
+
+        </mat-dialog-content>
+
+        <mat-grid-tile [colspan]="2">
+            <mat-dialog-actions>
+                <button type="submit" mat-raised-button name="submitButton">Agregar</button>
+                <button mat-raised-button mat-dialog-close name="cancelButton">Cancelar</button>
+            </mat-dialog-actions>
+        </mat-grid-tile>
+
+    </form>
+
+</mat-grid-list>

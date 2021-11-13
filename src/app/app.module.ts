@@ -41,6 +41,9 @@ import { AvanceComponent } from './main/avance/avance.component';
 import { AddSolicitudComponent } from './main/solicitud/add-solicitud/add-solicitud.component';
 import { EditSolicitudComponent } from './main/solicitud/edit-solicitud/edit-solicitud.component';
 import { DetailsSolicitudComponent } from './main/solicitud/details-solicitud/details-solicitud.component';
+import { AddAvanceComponent } from './main/avance/add-avance/add-avance.component';
+import { EditAvanceComponent } from './main/avance/edit-avance/edit-avance.component';
+import { DetailsAvanceComponent } from './main/avance/details-avance/details-avance.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { DetailsSolicitudComponent } from './main/solicitud/details-solicitud/de
     AvanceComponent,
     AddSolicitudComponent,
     EditSolicitudComponent,
-    DetailsSolicitudComponent
+    DetailsSolicitudComponent,
+    AddAvanceComponent,
+    EditAvanceComponent,
+    DetailsAvanceComponent
   ],
   imports: [
     BrowserModule,

@@ -40,17 +40,6 @@
 
             <mat-grid-tile [colspan]="1">
                 <mat-form-field appearance="outline">
-                    <mat-label>Usuario Aplicativo</mat-label>
-                    <mat-select formControlName="idUsuarioAplicativo" required>
-                        <mat-option *ngFor="let item of funcionarioCompleteList" [value]="item.IdFuncionario">
-                            [{{item.IdFuncionario}}]: {{item.NombreCompleto}}</mat-option>
-                    </mat-select>
-                    <mat-error>Este campo es obligatorio</mat-error>
-                </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile [colspan]="1">
-                <mat-form-field appearance="outline">
                     <mat-label>Responsable TI</mat-label>
                     <mat-select formControlName="idResponsableTI" required>
                         <mat-option *ngFor="let item of responsableTIList" [value]="item.IdFuncionario">
@@ -70,8 +59,6 @@
                     <mat-error>Este campo es obligatorio</mat-error>
                 </mat-form-field>
             </mat-grid-tile>
-
-            <mat-grid-tile [colspan]="1"></mat-grid-tile>
 
             <mat-grid-tile [colspan]="2">
                 <label>Archivos .pdf</label>

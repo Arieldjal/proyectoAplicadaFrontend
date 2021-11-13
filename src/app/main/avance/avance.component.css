@@ -1,0 +1,48 @@
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: greenyellow;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.inner-table {
+  width: 100%;
+  border: 5px;
+  border-color: red;
+  margin-bottom: 25px;
+}
+
+.inner-table mat-form-field {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.mat-row:nth-child(2n+1){
+  background-color: #edb879;
+}
+
+.mat-row:not(:nth-child(4n+1)){
+  background-color:#76b5c5;
+}
+
+.child-row {
+  background-color: #abdbe3;
+}
+
+.child-header {
+  background-color: #E4F0EC
+}

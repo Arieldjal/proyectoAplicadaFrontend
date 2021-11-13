@@ -52,6 +52,10 @@ export class SolicitudService {
     );
   }
 
+  getMainSolicitudesData(): Observable<any> {
+    return this.http.get(endpoint + 'consultaSimple');
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
 
