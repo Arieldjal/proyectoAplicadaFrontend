@@ -7,16 +7,29 @@
 
     <a mat-button [matMenuTriggerFor]="mantenimientos" class="toolbar-button">Mantenimientos</a>
     <mat-menu #mantenimientos="matMenu" class="customize">
-        <button mat-menu-item [routerLink]="'/funcionario'">Sexo</button>
-        <button mat-menu-item [routerLink]="'/funcionario'">Trimestre</button>
-        <button mat-menu-item [routerLink]="'/funcionario'">Departamento</button>
+        <button mat-menu-item [routerLink]="'/sexo'">Sexo</button>
+        <button mat-menu-item [routerLink]="'/trimestre'">Trimestre</button>
+        <button mat-menu-item [routerLink]="'/departamento'">Departamento</button>
         <button mat-menu-item [routerLink]="'/funcionario'">Funcionario</button>
-        <button mat-menu-item [routerLink]="'/funcionario'">Transacción</button>
+        <button mat-menu-item [routerLink]="'/transaccion'">Transacción</button>
     </mat-menu>
     <a mat-button class="toolbar-button" [routerLink]="'/solicitud'">Solicitud</a>
-    <a mat-button class="toolbar-button">Cambios</a>
     <a mat-button class="toolbar-button" [routerLink]="'/avance'">Avances</a>
-    <a mat-button class="toolbar-button">Reportes</a>
+    <a mat-button [matMenuTriggerFor]="reportes" class="toolbar-button">Reportes</a>
+    <mat-menu #reportes="matMenu" class="customize">
+        <button mat-menu-item [routerLink]="'/reporte-solicitudes-rango-fechas'">Solicitudes por fechas</button>
+        <button mat-menu-item [routerLink]="'/reporte-bitacora-transacciones-rango-meses'">Bitácora transacciones</button>
+        <button mat-menu-item [routerLink]="'/reporte-grafico-avances'">Avance de los proyectos</button>
+        <button mat-menu-item [routerLink]="'/reporte-grafico-proyectos-terminados-pendientes'">Estado de proyectos</button>
+        <button mat-menu-item [routerLink]="'/reporte-historico-avance-trimestral'">Avance trimestral por proyecto</button>
+        <button mat-menu-item [routerLink]="'/reporte-proyecto-solicitudes-cambios'">Proyectos con cambios</button>
+    </mat-menu>
     <a mat-button class="toolbar-button">Cubo</a>
-    <a mat-raised-button color="accent" class="toolbar-button" (click)="logOut()">Cerrar sesión</a>
+    <a mat-button [matMenuTriggerFor]="perfil" class="toolbar-button"><span>
+        <img class="profile-img" src="{{profile.Foto}}">
+    </span> {{profile.Nombre}} {{profile.Apellidos}}
+    </a>
+    <mat-menu #perfil="matMenu" class="customize">
+        <button mat-menu-item color="accent" class="toolbar-button" (click)="logOut()"><mat-icon style="color: white;">logout</mat-icon>Cerrar sesión</button>
+      </mat-menu>
 </mat-toolbar>

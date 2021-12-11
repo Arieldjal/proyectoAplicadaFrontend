@@ -44,8 +44,8 @@ export class AvanceService {
     );
   }
 
-  deleteAvance(idAvance): Observable<any> {
-    return this.http.delete(endpoint + 'eliminar/' + idAvance).pipe(
+  deleteAvance(idAvance, idFuncionario): Observable<any> {
+    return this.http.delete(endpoint + 'eliminar/' + idAvance + '/' + idFuncionario).pipe(
       tap(res => {
         return res;
       }),

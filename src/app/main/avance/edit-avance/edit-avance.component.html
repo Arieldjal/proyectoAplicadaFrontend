@@ -1,19 +1,30 @@
-<mat-grid-list cols="3" rowHeight="80px" [gutterSize]="'10px'">
-    <mat-grid-tile [colspan]="3">
+<mat-grid-list cols="2" rowHeight="80px" [gutterSize]="'10px'">
+    <mat-grid-tile [colspan]="2">
         <h2 mat-dialog-title>Editar avance {{avance.IdAvance}}</h2>
     </mat-grid-tile>
     <form [formGroup]="updateForm" (ngSubmit)="updateAvance()" #formDir="ngForm">
 
         <mat-dialog-content>
 
-            <mat-grid-tile [colspan]="3">
+            <mat-grid-tile [colspan]="2">
+                <mat-form-field appearance="outline">
+                    <mat-label>Estado del avance</mat-label>
+                    <mat-select formControlName="terminado" [(ngModel)]="avance.Terminado">
+                        <mat-option [value]="true">Terminado</mat-option>
+                        <mat-option [value]="false">Pendiente</mat-option>
+                    </mat-select>
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="2">
                     <button class="no-background-button" type="button"><i class="material-icons">picture_as_pdf</i>{{this.currentDocumentName}}</button>
                     <input type="file" accept="application/pdf" (change)="onSelectNewFile($event?.target)"/>
             </mat-grid-tile>
 
         </mat-dialog-content>
 
-        <mat-grid-tile [colspan]="3">
+        <mat-grid-tile [colspan]="2">
             <mat-dialog-actions>
                 <button type="submit" mat-raised-button name="submitButton">Actualizar</button>
                 <button mat-raised-button mat-dialog-close name="cancelButton">Cancelar</button>

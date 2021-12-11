@@ -5,6 +5,20 @@
 
     <mat-dialog-content>
 
+        <mat-grid-tile [colspan]="2">
+            <mat-form-field>
+                <mat-label>Nombre del proyecto</mat-label>
+                <input matInput disabled>{{solicitud.NombreProyecto}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Estado de la solicitud</mat-label>
+                <input matInput disabled>{{checkState(solicitud.Terminado)}}
+            </mat-form-field>
+        </mat-grid-tile>
+
         <mat-grid-tile [colspan]="1">
             <mat-form-field>
                 <mat-label>Fecha Hora</mat-label>
@@ -48,7 +62,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile [colspan]="3">
-                <button class="no-background-button" type="button" (click)="downloadPdf()"><i class="material-icons">picture_as_pdf</i>Acta Constitutiva Solicitud {{this.solicitud.IdSolicitud}}
+                <button class="no-background-button" type="button" (click)="viewPdfOnBrowser()"><i class="material-icons">picture_as_pdf</i>Acta Constitutiva Solicitud {{this.solicitud.IdSolicitud}}
                 </button>
         </mat-grid-tile>
 

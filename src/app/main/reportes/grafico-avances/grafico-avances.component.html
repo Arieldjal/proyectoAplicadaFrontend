@@ -1,0 +1,25 @@
+<app-nav-bar></app-nav-bar>
+<div class="child-div">
+  <div class="content-div">
+    <h1>Gráfico de avance de los proyectos</h1>
+
+    <button mat-raised-button name="pdfButton" (click)="downloadAsPdf()"><span
+        class="material-icons">picture_as_pdf</span></button>
+        
+    <div id="graph-div" class="graph-div">
+
+      <ngx-charts-bar-vertical [view]="view" scheme="picnic" [results]="graphData" [gradient]="gradient"
+        [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+        <ng-template #tooltipTemplate let-model="model">
+          <h4>
+            Solicitud: {{ model.name }}
+          </h4>
+          <h4>Avances: {{ model.value }}</h4>
+        </ng-template>
+      </ngx-charts-bar-vertical>
+
+    </div>
+
+  </div>
+</div>

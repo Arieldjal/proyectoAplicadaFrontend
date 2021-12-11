@@ -1,0 +1,56 @@
+<app-nav-bar></app-nav-bar>
+<div class="child-div">
+    <div class="content-div">
+        <h1>Proyectos que han solicitado cambios</h1>
+
+        <div class="search-div">
+            <mat-form-field class="custom-search-form-field" floatLabel="never">
+                <input matInput [(ngModel)]="searchKey" placeholder="Buscar" autocomplete="off" (keyup)="applyFilter()">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey"
+                    (click)="onSearchClear()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <button mat-raised-button name="pdfButton" (click)="downloadAsPdf()"><span
+                class="material-icons">picture_as_pdf</span></button>
+        </div>
+        <div class="table-div">
+            <table mat-table [dataSource]="dataSource" matSort class="data-table">
+
+                <ng-container matColumnDef="IdBitacoraAuditoria">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id Bitácora Auditoría </th>
+                    <td mat-cell *matCellDef="let element"> {{element.IdBitacoraAuditoria}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="IdSolicitud">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id Solicitud </th>
+                    <td mat-cell *matCellDef="let element"> {{element.IdSolicitud}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Descripcion">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Transacción </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Descripcion}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="NombreCompleto">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Funcionario </th>
+                    <td mat-cell *matCellDef="let element"> {{element.NombreCompleto}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="FechaHora">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Hora </th>
+                    <td mat-cell *matCellDef="let element"> {{element.FechaHora}} </td>
+                </ng-container>
+                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[10, 15, 20]" [pageSize]="10" showFirstLastButtons
+                aria-label="Seleccione página"></mat-paginator>
+        </div>
+
+    </div>
+</div>

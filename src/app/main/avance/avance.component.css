@@ -22,7 +22,6 @@ tr.example-element-row:not(.example-expanded-row):active {
 .inner-table {
   width: 100%;
   border: 5px;
-  border-color: red;
   margin-bottom: 25px;
 }
 
@@ -32,17 +31,17 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
 
 .mat-row:nth-child(2n+1){
-  background-color: #edb879;
+  background-color: #f6f8f8;
 }
 
 .mat-row:not(:nth-child(4n+1)){
-  background-color:#76b5c5;
+  background-color:#D6e5ea;
 }
 
 .child-row {
-  background-color: #abdbe3;
+  background-color: #D6e5ea;
 }
 
 .child-header {
-  background-color: #E4F0EC
+  background-color: #f6f8f8;
 }

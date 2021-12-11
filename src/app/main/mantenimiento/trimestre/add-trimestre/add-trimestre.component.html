@@ -1,0 +1,26 @@
+<mat-grid-list cols="1" rowHeight="80px" [gutterSize]="'10px'">
+    <mat-grid-tile [colspan]="1">
+        <h2 mat-dialog-title>Agregar trimestre</h2>
+    </mat-grid-tile>
+    <form [formGroup]="trimestreForm" (ngSubmit)="addTrimestre()" #formDir="ngForm">
+
+        <mat-dialog-content>
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Trimestre</mat-label>
+                    <input matInput type="text" formControlName="descripcion" placeholder="Trimestre" required autocomplete="off">
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-dialog-content>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-dialog-actions>
+                <button type="submit" mat-raised-button name="submitButton">Agregar</button>
+                <button mat-raised-button mat-dialog-close name="cancelButton">Cancelar</button>
+            </mat-dialog-actions>
+        </mat-grid-tile>
+
+    </form>
+
+</mat-grid-list>

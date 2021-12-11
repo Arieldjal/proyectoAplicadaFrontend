@@ -76,6 +76,11 @@ button[name="cancelButton"]{
     background-color: #ef6161;
     color: #ffffff;
 }
+
+button[name="pdfButton"]{
+    background-color: #F40F02;
+    margin-right: 5px;
+}
   
 ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
     background: #ffffff;
@@ -179,20 +184,70 @@ button[name="cancelButton"]{
   }
 
   .mat-row:nth-child(even){
-    background-color: #76b5c5;
+    background-color: #D6e5ea;
 }
         
 .mat-row:nth-child(odd){
-    background-color: #edb879;
+    background-color: #f6f8f8;
 }
 
 .mat-header-cell {
-    background: #D84944;
+    background: #D6e5ea;
 }
 
 .mat-paginator .mat-paginator-container{
-    background:#D84944 !important;
+    background:#D6e5ea !important;
 }
 
+.date-div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
- 
+.date-form-field{
+    width: 15%;
+    height: 10%;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.date-form-field div.mat-form-field-underline {
+    display: none;
+}
+ .date-form-field div.mat-form-field-infix{
+    border-top: 0px;
+}
+
+.date-form-field div.mat-form-field-wrapper{
+    padding-bottom: 0px;
+}
+
+.custom-search-form-field{
+    width: 62.5%;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.custom-search-form-field div.mat-form-field-underline {
+    display: none;
+}
+ .custom-search-form-field div.mat-form-field-infix{
+    border-top: 0px;
+}
+
+.custom-search-form-field div.mat-form-field-wrapper{
+    padding-bottom: 0px;
+}
+
+.custom-search-form-field div.mat-form-field-suffix button{
+    height: 32px;
+    width: 32px;
+}
+
+.chart-legend .legend-label-text {
+    color: white;
+}

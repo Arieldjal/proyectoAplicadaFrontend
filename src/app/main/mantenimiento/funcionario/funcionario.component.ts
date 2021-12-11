@@ -23,9 +23,7 @@ export class FuncionarioComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
 
-  constructor(private funcionarioService: FuncionarioService, private dialog: MatDialog, private snackbarService: SnackbarService) {
-
-  }
+  constructor(private funcionarioService: FuncionarioService, private dialog: MatDialog, private snackbarService: SnackbarService) {}
 
   ngOnInit(): void {
     this.getFuncionarios();

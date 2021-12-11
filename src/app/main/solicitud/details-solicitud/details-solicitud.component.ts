@@ -23,11 +23,14 @@ export class DetailsSolicitudComponent implements OnInit {
   }
 
   viewPdfOnBrowser() {
-    let pdfWindow = window.open()
-    pdfWindow.document.write(
-      "<iframe width='100%' height='100%' src='" +
-      encodeURI(this.solicitud.DocumentoActaConstitutiva) + "'></iframe>"
-    )
+    if(this.file+""!="null"){
+      let pdfWindow = window.open()
+      pdfWindow.document.write('<iframe src="' + this.file + '" frameborder="0" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>')
+    }
+    /*
+    console.log(this.file)
+    const fileURL = URL.createObjectURL(this.file);
+    window.open(fileURL)*/
   }
 
   downloadPdf() {
@@ -39,5 +42,11 @@ export class DetailsSolicitudComponent implements OnInit {
     link.click();
   }
 
-
+  checkState(bool): string{
+    if(bool){
+      return "Terminado";
+    }
+    else
+      return "Pendiente"
+  }
 }

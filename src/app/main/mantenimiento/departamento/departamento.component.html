@@ -1,1 +1,50 @@
-<p>departamento works!</p>
+<app-nav-bar></app-nav-bar>
+<div class="child-div">
+    <div class="content-div">
+        <h1>Mantenimiento de Departamentos</h1>
+
+        <div class="search-div">
+            <button mat-raised-button color="primary" (click)="openAddDialog()"><span class="material-icons">add</span> Agregar
+                departamento</button>
+            <mat-form-field class="search-form-field" floatLabel="never">
+                <input matInput [(ngModel)]="searchKey" placeholder="Buscar" autocomplete="off" (keyup)="applyFilter()">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="table-div">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="IdDepartamento">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.IdDepartamento}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Descripcion">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del departamento </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Descripcion}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element" class="action-link">
+                        <button mat-raised-button class="table-button" color="accent" (click)="modify(element.IdDepartamento)"><span
+                                class="material-icons">edit</span></button>
+                        <button mat-raised-button class="table-button" (click)="details(element.IdDepartamento)"><span
+                                class="material-icons">details</span></button>
+                        <button mat-raised-button class="table-button" color="warn"
+                            (click)="delete(element.IdDepartamento, element.Descripcion)"><span
+                                class="material-icons">delete</span></button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[10, 15, 20]" [pageSize]="10" showFirstLastButtons aria-label="Seleccione página"></mat-paginator>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ import { FuncionarioService } from '../../../service/funcionario/funcionario.ser
 import { SnackbarService } from '../../../snackbar/snackbar.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DomSanitizer } from "@angular/platform-browser";
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-edit-solicitud',
@@ -23,11 +24,11 @@ export class EditSolicitudComponent implements OnInit {
   base64: string = "Base64...";
   fileSelected?: File;
   fileUrl?: any;
-  currentDate = new Date();
+  currentDate: Date;
   currentDocumentName: string = "";
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private solicitudService: SolicitudService, private funcionarioService: FuncionarioService,
-    private snackbarService: SnackbarService, private dialogRef: MatDialogRef<EditSolicitudComponent>, private sant: DomSanitizer) {
+    private snackbarService: SnackbarService, private dialogRef: MatDialogRef<EditSolicitudComponent>, private sant: DomSanitizer, private datePipe: DatePipe) {
 
     this.updateForm = new FormGroup({
       idSolicitud: new FormControl('', [Validators.required]),
@@ -36,12 +37,17 @@ export class EditSolicitudComponent implements OnInit {
       documentoActaConstitutiva: new FormControl(null),
       idUsuarioAplicativo: new FormControl('', [Validators.required]),
       idResponsableTI: new FormControl('', [Validators.required]),
-      idResponsableUsuarioFinal: new FormControl('', [Validators.required])
+      idResponsableUsuarioFinal: new FormControl('', [Validators.required]),
+      terminado: new FormControl('', [Validators.required]),
+      nombreProyecto: new FormControl('', [Validators.required])
     });
 
     this.solicitudService.getSolicitudById(this.data.dataKey).subscribe((data: any) => {
       console.log(data);
       this.solicitud = data;
+      this.solicitud.FechaInicio = this.solicitud.FechaInicio + "T00:00:00";
+      this.solicitud.FechaFin = this.solicitud.FechaFin + "T00:00:00";
+      this.currentDate = this.solicitud.FechaInicio;
       this.fileUrl = this.solicitud.DocumentoActaConstitutiva;
       this.updateForm.controls['documentoActaConstitutiva'].setValue(this.solicitud.DocumentoActaConstitutiva);
       this.updateForm.controls['idSolicitud'].setValue(this.data.dataKey);
@@ -59,6 +65,7 @@ export class EditSolicitudComponent implements OnInit {
   }
 
   updateSolicitud() {
+    console.log(this.updateForm.value)
     this.updateForm.controls['idUsuarioAplicativo'].setValue(JSON.parse(sessionStorage.getItem('currentUser')).IdFuncionario);
 
     if (!this.updateForm.valid) {
@@ -95,12 +102,20 @@ export class EditSolicitudComponent implements OnInit {
   }
 
   onSelectNewFile(elemnt: HTMLInputElement): void {
-    if (elemnt.files?.length == 0) return;
-    this.currentDocumentName = "Nuevo archivo cargado"
-    this.fileSelected = (elemnt.files as FileList)[0];
-    this.fileUrl = this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
-
-    this.convertFileToBase64();
+    let file = elemnt.files[0];
+    
+    //Maximo 5 megas
+    if(file.size < (1024 * 1024)*5) {
+      if (elemnt.files?.length == 0) return;
+      this.currentDocumentName = "Nuevo archivo cargado"
+      this.fileSelected = (elemnt.files as FileList)[0];
+      this.fileUrl = this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+      this.convertFileToBase64();
+    
+    } else {
+      elemnt.value = null
+      this.snackbarService.openSnackBar('El tamaño máximo aceptado para un archivo es de 5 MB')
+    }
   }
 
   /** Convert File To Base64 */

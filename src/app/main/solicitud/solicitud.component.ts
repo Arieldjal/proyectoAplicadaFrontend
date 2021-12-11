@@ -17,7 +17,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class SolicitudComponent implements OnInit {
 
   dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = ['IdSolicitud', 'FechaHora', 'FechaInicio', 'FechaFin', 'IdUsuarioAplicativo', 'IdResponsableTI', 'IdResponsableUsuarioFinal', 'action'];
+  displayedColumns: string[] = ['IdSolicitud', 'NombreProyecto', 'FechaHora', 'FechaInicio', 'FechaFin', 'IdUsuarioAplicativo', 'IdResponsableTI', 'IdResponsableUsuarioFinal', 'Terminado', 'action'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
@@ -82,9 +82,14 @@ export class SolicitudComponent implements OnInit {
 
   delete(idSolicitud) {
     if (confirm("¿Desea borrar la solicitud " + idSolicitud + "?")) {
-      this.solicitudService.deleteSolicitud(idSolicitud).subscribe(res => {
-        this.snackbarService.openSnackBar("Solicitud " + idSolicitud + ": eliminada");
-        this.getSolicitudes();
+      var idFuncionario = JSON.parse(sessionStorage.getItem('currentUser')).IdFuncionario;
+      this.solicitudService.deleteSolicitud(idSolicitud, idFuncionario).subscribe(res => {
+        if(res){
+          this.snackbarService.openSnackBar("Solicitud " + idSolicitud + ": eliminada");
+          this.getSolicitudes();
+        } else {
+          this.snackbarService.openSnackBar("Error al eliminar la solicitud " + idSolicitud);
+        }
       });
     }
   }
@@ -98,4 +103,11 @@ export class SolicitudComponent implements OnInit {
     this.dataSource.filter = this.searchKey.trim().toLowerCase();
   }
 
+  checkState(bool): string{
+    if(bool){
+      return "Terminado";
+    }
+    else
+      return "Pendiente"
+  }
 }

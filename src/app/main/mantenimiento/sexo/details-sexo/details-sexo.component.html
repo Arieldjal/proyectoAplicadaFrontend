@@ -1,0 +1,23 @@
+<mat-grid-list cols="1" rowHeight="80px" [gutterSize]="'10px'">
+    <mat-grid-tile [colspan]="1">
+        <h2 mat-dialog-title>Detalles del sexo {{sexo.IdSexo}}</h2>
+    </mat-grid-tile>
+
+        <mat-dialog-content>
+
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field>
+                    <mat-label>Sexo</mat-label>
+                    <input matInput disabled>{{sexo.Descripcion}}
+                </mat-form-field>
+            </mat-grid-tile>
+
+        </mat-dialog-content>
+
+        <mat-grid-tile [colspan]="1">
+            <mat-dialog-actions>
+                <button mat-raised-button mat-dialog-close name="cancelButton">Cancelar</button>
+            </mat-dialog-actions>
+        </mat-grid-tile>
+
+</mat-grid-list>

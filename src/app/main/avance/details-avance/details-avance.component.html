@@ -33,8 +33,17 @@
             </mat-form-field>
         </mat-grid-tile>
 
+        <mat-grid-tile [colspan]="1">
+            <mat-form-field>
+                <mat-label>Estado del avance</mat-label>
+                <input matInput disabled>{{checkState(avance.Terminado)}}
+            </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="1"></mat-grid-tile>
+
         <mat-grid-tile [colspan]="2">
-                <button class="no-background-button" type="button" (click)="downloadPdf()"><i class="material-icons">picture_as_pdf</i>Documento Avance {{avance.IdAvance}}
+                <button class="no-background-button" type="button" (click)="viewPdfOnBrowser()"><i class="material-icons">picture_as_pdf</i>Documento Avance {{avance.IdAvance}}
                 </button>
         </mat-grid-tile>
 

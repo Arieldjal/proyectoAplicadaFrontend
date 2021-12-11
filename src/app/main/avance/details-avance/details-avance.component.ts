@@ -14,7 +14,6 @@ export class DetailsAvanceComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private avanceService: AvanceService) {
     this.avanceService.getAvanceById(this.data.dataKey).subscribe((data: any) => {
-      console.log(data);
       this.avance = data;
       this.file = this.avance.Documento;
     });
@@ -30,6 +29,25 @@ export class DetailsAvanceComponent implements OnInit {
     link.href = source;
     link.download = `${fileName}.pdf`
     link.click();
+  }
+
+  viewPdfOnBrowser() {
+    if(this.file+""!="null"){
+      let pdfWindow = window.open()
+      pdfWindow.document.write('<iframe src="' + this.file + '" frameborder="0" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;"></iframe>')
+    }
+    /*
+    console.log(this.file)
+    const fileURL = URL.createObjectURL(this.file);
+    window.open(fileURL)*/
+  }
+
+  checkState(bool): string{
+    if(bool){
+      return "Terminado";
+    }
+    else
+      return "Pendiente"
   }
 
 }

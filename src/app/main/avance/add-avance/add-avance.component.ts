@@ -54,11 +54,19 @@ export class AddAvanceComponent implements OnInit {
 
 
   onSelectNewFile(elemnt: HTMLInputElement): void {
-    if (elemnt.files?.length == 0) return;
-    this.fileSelected = (elemnt.files as FileList)[0];
-    this.fileUrl = this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+    let file = elemnt.files[0];
+    
+    //Maximo 5 megas
+    if(file.size < (1024 * 1024)*5) {
+      if (elemnt.files?.length == 0) return;
+      this.fileSelected = (elemnt.files as FileList)[0];
+      this.fileUrl = this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+      this.convertFileToBase64();
 
-    this.convertFileToBase64();
+    } else {
+      elemnt.value = null
+      this.snackbarService.openSnackBar('El tamaño máximo aceptado para un archivo es de 5 MB')
+    }
   }
 
   /** Convert File To Base64 */

@@ -1,0 +1,19 @@
+<app-nav-bar></app-nav-bar>
+<div class="child-div">
+    <div class="content-div">
+        <h1>Gráfico de proyectos terminados y pendientes</h1>
+
+        <button mat-raised-button name="pdfButton" (click)="downloadAsPdf()"><span
+            class="material-icons">picture_as_pdf</span></button>
+
+        <div id="graph-div" class="graph-div">
+
+            <ngx-charts-pie-chart [view]="view" scheme="picnic" [results]="graphData" [legend]="showLegend"
+                [legendPosition]="legendPosition" [legendTitle]="legendTitle" [labels]="showLabels"
+                [doughnut]="isDoughnut">
+            </ngx-charts-pie-chart>
+
+        </div>
+
+    </div>
+</div>

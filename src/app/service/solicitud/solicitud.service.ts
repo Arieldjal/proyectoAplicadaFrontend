@@ -43,8 +43,8 @@ export class SolicitudService {
     );
   }
 
-  deleteSolicitud(idSolicitud): Observable<any> {
-    return this.http.delete(endpoint + 'eliminar/' + idSolicitud).pipe(
+  deleteSolicitud(idSolicitud, idFuncionario): Observable<any> {
+    return this.http.delete(endpoint + 'eliminar/' + idSolicitud + '/' + idFuncionario).pipe(
       tap(res => {
         return res;
       }),
@@ -54,6 +54,10 @@ export class SolicitudService {
 
   getMainSolicitudesData(): Observable<any> {
     return this.http.get(endpoint + 'consultaSimple');
+  }
+
+  getSolicitudesIds(): Observable<any> {
+    return this.http.get(endpoint + 'consultaSolicitudesIds');
   }
 
   private handleError<T>(operation = "operation", result?: T) {

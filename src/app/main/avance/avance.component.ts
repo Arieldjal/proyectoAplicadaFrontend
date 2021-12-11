@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, ViewChildren, QueryList, ChangeDetectorRef  } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList, ChangeDetectorRef } from '@angular/core';
 import { AvanceService } from '../../service/avance/avance.service';
-import { SolicitudService } from '../../service/solicitud/solicitud.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddAvanceComponent } from './add-avance/add-avance.component';
 import { DetailsAvanceComponent } from './details-avance/details-avance.component';
@@ -17,8 +16,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrls: ['./avance.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -26,8 +25,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class AvanceComponent implements OnInit {
 
   dataSourceSolicitud: MatTableDataSource<any>;
-  displayedColumns: string[] = ['IdSolicitud', 'FechaInicio', 'FechaFin', 'action'];
-  expandedColumns: string[] = ['IdAvance', 'FechaHora', 'Descripcion', 'UsuarioAplicativo', 'action'];
+  displayedColumns: string[] = ['IdSolicitud', 'NombreProyecto', 'FechaInicio', 'FechaFin', 'Terminado', 'action'];
+  expandedColumns: string[] = ['IdAvance', 'FechaHora', 'Descripcion', 'UsuarioAplicativo', 'Terminado', 'action'];
   @ViewChild('outerSort') sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChildren('innerSort') innerSort: QueryList<MatSort>;
@@ -37,7 +36,7 @@ export class AvanceComponent implements OnInit {
   expandedElement: any;
   solicitudesData: any;
 
-  constructor(private avanceService: AvanceService, private dialog: MatDialog, private snackbarService: SnackbarService, private cd: ChangeDetectorRef) {}
+  constructor(private avanceService: AvanceService, private dialog: MatDialog, private snackbarService: SnackbarService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.getSolicitudesAndAvances();
@@ -64,16 +63,16 @@ export class AvanceComponent implements OnInit {
 
     this.avanceService.getAvances().subscribe((data: any[]) => {
       if (data) {
-        
+
         data.forEach(row => {
           if (row.AvanceList && Array.isArray(row.AvanceList) && row.AvanceList.length) {
             this.solicitudesData = [...this.solicitudesData, { ...row, AvanceList: new MatTableDataSource(row.AvanceList) }];
           } else {
             this.solicitudesData = [...this.solicitudesData, row];
           }
-          
+
         });
-        
+
         this.dataSourceSolicitud = new MatTableDataSource(this.solicitudesData);
         this.dataSourceSolicitud.sort = this.sort;
         this.dataSourceSolicitud.paginator = this.paginator;
@@ -120,9 +119,14 @@ export class AvanceComponent implements OnInit {
 
   delete(idAvance) {
     if (confirm("¿Desea borrar el avance ID: " + idAvance + "?")) {
-      this.avanceService.deleteAvance(idAvance).subscribe(res => {
-        this.snackbarService.openSnackBar("Avance ID: " + idAvance + " eliminado");
-        this.getSolicitudesAndAvances();
+      var idFuncionario = JSON.parse(sessionStorage.getItem('currentUser')).IdFuncionario;
+      this.avanceService.deleteAvance(idAvance, idFuncionario).subscribe(res => {
+        if (res) {
+          this.snackbarService.openSnackBar("Avance ID: " + idAvance + " eliminado");
+          this.getSolicitudesAndAvances();
+        } else {
+          this.snackbarService.openSnackBar("Error al eliminar el avance " + idAvance);
+        }
       });
     }
   }
@@ -139,6 +143,14 @@ export class AvanceComponent implements OnInit {
 
   applyFilter() {
     this.dataSourceSolicitud.filter = this.searchKey.trim().toLowerCase();
+  }
+
+  checkState(bool): string{
+    if(bool){
+      return "Terminado";
+    }
+    else
+      return "Pendiente"
   }
 }
 

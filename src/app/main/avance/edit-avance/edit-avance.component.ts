@@ -21,70 +21,86 @@ export class EditAvanceComponent implements OnInit {
   currentDocumentName: string = "";
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private avanceService: AvanceService,
-  private snackbarService: SnackbarService, private dialogRef: MatDialogRef<EditAvanceComponent>, private sant: DomSanitizer) {
+    private snackbarService: SnackbarService, private dialogRef: MatDialogRef<EditAvanceComponent>, private sant: DomSanitizer) {
 
-  this.updateForm = new FormGroup({
-    idAvance: new FormControl('', [Validators.required]),
-    documento: new FormControl(null),
-    idUsuarioAplicativo: new FormControl('', [Validators.required])
-  });
+    this.updateForm = new FormGroup({
+      idAvance: new FormControl('', [Validators.required]),
+      documento: new FormControl(null),
+      idUsuarioAplicativo: new FormControl('', [Validators.required]),
+      terminado: new FormControl('', [Validators.required]),
+    });
 
-  this.avanceService.getAvanceById(this.data.dataKey).subscribe((data: any) => {
-    console.log(data);
-    this.avance = data;
-    this.fileUrl = this.avance.Documento;
-    this.updateForm.controls['documento'].setValue(this.avance.Documento);
-    this.updateForm.controls['idAvance'].setValue(this.data.dataKey);
+    this.avanceService.getAvanceById(this.data.dataKey).subscribe((data: any) => {
+      this.avance = data;
+      this.fileUrl = this.avance.Documento;
+      this.updateForm.controls['documento'].setValue(this.avance.Documento);
+      this.updateForm.controls['idAvance'].setValue(this.data.dataKey);
+
+      if (this.avance.Documento == null || this.avance.Documento == "null") {
+        this.currentDocumentName = "No hay documento guardado";
+      } else {
+        this.currentDocumentName = "Documento Avance " + this.data.dataKey;
+      }
+    });
+  }
+
+  ngOnInit(): void { }
+
+  updateAvance() {
+    this.updateForm.controls['idUsuarioAplicativo'].setValue(JSON.parse(sessionStorage.getItem('currentUser')).IdFuncionario);
+
+    console.log(this.updateForm.value);
+
+    if (!this.updateForm.valid) {
+      return;
+    }
+
+    this.avanceService.updateAvance(this.updateForm.value).subscribe((result) => {
+      if (result == true) {
+        this.snackbarService.openSnackBar('Avance ' + this.data.dataKey + ' actualizado con éxito')
+        this.dialogRef.close(true);
+      } else {
+        this.snackbarService.openSnackBar('Error al actualizar el avance ' + this.data.dataKey)
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  onSelectNewFile(elemnt: HTMLInputElement): void {
+    let file = elemnt.files[0];
     
-    if(this.avance.Documento==null || this.avance.Documento=="null"){
-      this.currentDocumentName = "No hay documento guardado";
+    //Maximo 5 megas
+    if(file.size < (1024 * 1024)*5) {
+      if (elemnt.files?.length == 0) return;
+      this.currentDocumentName = "Nuevo archivo cargado"
+      this.fileSelected = (elemnt.files as FileList)[0];
+      this.fileUrl = this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
+      this.convertFileToBase64();
+
     } else {
-      this.currentDocumentName = "Documento Avance " + this.data.dataKey;
+      elemnt.value = null
+      this.snackbarService.openSnackBar('El tamaño máximo aceptado para un archivo es de 5 MB')
     }
-  });
-}
-
-ngOnInit(): void {}
-
-updateAvance() {
-  this.updateForm.controls['idUsuarioAplicativo'].setValue(JSON.parse(sessionStorage.getItem('currentUser')).IdFuncionario);
-
-  console.log(this.updateForm.value);
-
-  if (!this.updateForm.valid) {
-    return;
   }
 
-  this.avanceService.updateAvance(this.updateForm.value).subscribe((result) => {
-    if (result == true) {
-      this.snackbarService.openSnackBar('Avance ' + this.data.dataKey + ' actualizado con éxito')
-      this.dialogRef.close(true);
-    } else {
-      this.snackbarService.openSnackBar('Error al actualizar el avance ' + this.data.dataKey)
+  /** Convert File To Base64 */
+  convertFileToBase64(): void {
+    let reader = new FileReader();
+    reader.readAsDataURL(this.fileSelected as Blob);
+    reader.onloadend = () => {
+      this.base64 = reader.result as string;
+      /*Asignar el archivo en base64 a la foto del funcionario*/
+      this.updateForm.controls['documento'].setValue(this.base64);
     }
-  }, (err) => {
-    console.log(err);
-  });
-}
-
-onSelectNewFile(elemnt: HTMLInputElement): void {
-  if (elemnt.files?.length == 0) return;
-  this.currentDocumentName = "Nuevo archivo cargado"
-  this.fileSelected = (elemnt.files as FileList)[0];
-  this.fileUrl = this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
-
-  this.convertFileToBase64();
-}
-
-/** Convert File To Base64 */
-convertFileToBase64(): void {
-  let reader = new FileReader();
-  reader.readAsDataURL(this.fileSelected as Blob);
-  reader.onloadend = () => {
-    this.base64 = reader.result as string;
-    /*Asignar el archivo en base64 a la foto del funcionario*/
-    this.updateForm.controls['documento'].setValue(this.base64);
   }
-}
+
+  checkState(bool): string {
+    if (bool) {
+      return "Terminado";
+    }
+    else
+      return "Pendiente"
+  }
 
 }

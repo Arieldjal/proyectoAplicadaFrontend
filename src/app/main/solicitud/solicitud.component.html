@@ -21,6 +21,11 @@
                     <td mat-cell *matCellDef="let element"> {{element.IdSolicitud}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="NombreProyecto">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del proyecto </th>
+                    <td mat-cell *matCellDef="let element"> {{element.NombreProyecto}} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="FechaHora">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Hora </th>
                     <td mat-cell *matCellDef="let element"> {{element.FechaHora}} </td>
@@ -47,14 +52,19 @@
                 </ng-container>
 
                 <ng-container matColumnDef="IdResponsableUsuarioFinal">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Responsable Usuario Final </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario Final </th>
                     <td mat-cell *matCellDef="let element"> {{element.IdResponsableUsuarioFinal}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Terminado">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                    <td mat-cell *matCellDef="let element"> {{checkState(element.Terminado)}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef> Acciones </th>
                     <td mat-cell *matCellDef="let element" class="action-link">
-                        <button mat-raised-button class="table-button" color="accent" (click)="modify(element.IdSolicitud)"><span
+                        <button mat-raised-button *ngIf="!element.Terminado" class="table-button" color="accent" (click)="modify(element.IdSolicitud)"><span
                                 class="material-icons">edit</span></button>
                         <button mat-raised-button class="table-button" (click)="details(element.IdSolicitud)"><span
                                 class="material-icons">details</span></button>

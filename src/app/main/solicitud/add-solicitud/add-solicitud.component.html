@@ -14,7 +14,14 @@
                 </mat-form-field>
             </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1"></mat-grid-tile>
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre del proyecto</mat-label>
+                    <input matInput type="text" formControlName="nombreProyecto" placeholder="Ingrese nombre del proyecto" required
+                        autocomplete="off">
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1">
                 <mat-form-field appearance="outline">
@@ -62,7 +69,7 @@
 
             <mat-grid-tile [colspan]="2">
                 <label>Archivos .pdf</label>
-                <input type="file" accept="application/pdf" (change)="onSelectNewFile($event?.target)" />
+                <input type="file" accept="application/pdf" (change)="onSelectNewFile($event?.target)"/>
             </mat-grid-tile>
 
         </mat-dialog-content>

@@ -8,8 +8,28 @@
 
             <mat-grid-tile [colspan]="1">
                 <mat-form-field appearance="outline">
+                    <mat-label>Nombre del proyecto</mat-label>
+                    <input matInput type="text" formControlName="nombreProyecto" placeholder="Ingrese nombre del proyecto" required
+                        autocomplete="off" [(ngModel)]="solicitud.NombreProyecto">
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="terminado" [(ngModel)]="solicitud.Terminado">
+                        <mat-option [value]="true">Terminado</mat-option>
+                        <mat-option [value]="false">Pendiente</mat-option>
+                    </mat-select>
+                    <mat-error>Este campo es obligatorio</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1">
+                <mat-form-field appearance="outline">
                     <mat-label>Fecha inicio</mat-label>
-                    <input matInput [matDatepicker]="fechaInicioPicker" [min]="this.currentDate"
+                    <input matInput [matDatepicker]="fechaInicioPicker" [min]="this.currentDate" [max]="solicitud.FechaFin"
                         formControlName="fechaInicio" placeholder="Ingrese una fecha de inicio" required
                         autocomplete="off" [(ngModel)]="solicitud.FechaInicio">
                     <mat-datepicker-toggle matSuffix [for]="fechaInicioPicker"></mat-datepicker-toggle>
